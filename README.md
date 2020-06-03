@@ -1,2 +1,5 @@
 # algorithm-js
-用js实现数据结构和算法
+  Leetcode 刷题记录
+
+## 刷题方法
+## 题型分类
