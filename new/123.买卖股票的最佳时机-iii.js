@@ -4,7 +4,7 @@
  * @Author: shelia
  * @Date: 2020-08-04 16:12:08
  * @LastEditors: shelia
- * @LastEditTime: 2020-08-04 19:09:24
+ * @LastEditTime: 2020-08-05 10:08:03
  */
 /*
  * @lc app=leetcode.cn id=123 lang=javascript
@@ -19,21 +19,15 @@
  */
 var maxProfit = function(prices) {
   let n = prices.length;
-  let dp_i_k_0 = 0, dp_i_k_1 = -Infinity, temp, max_k = 2;
-  let kArray = new Array(n);
+  let dp_i10 = 0, dp_i11 = -Infinity, dp_i20 = 0, dp_i21 = -Infinity;
   for(let i = 0; i < n; i++){
-    kArray[i] = new Array(max_k+1);
-    for(let j = 0; j <= max_k; j++){
-      if(j - 1 == -1 || i - 1 == -1){
-        kArray[i][j] = 0;
-        continue;
-      }
-      dp_i_k_0 = Math.max(dp_i_k_0, dp_i_k_1 + prices[i]);
-      kArray[i][j] = dp_i_k_1 + prices[i];
-      dp_i_k_1 = Math.max(dp_i_k_1, kArray[i-1][j-1] - prices[i]);
-    }
+    // 卖出不算交易一次，只有买入才算交易一次
+    dp_i20 = Math.max(dp_i20, dp_i21 + prices[i]);
+    dp_i21 = Math.max(dp_i21, dp_i10 - prices[i]);
+    dp_i10 = Math.max(dp_i10, dp_i11 + prices[i]);
+    dp_i11 = Math.max(dp_i11, -prices[i]);
   }
-  return dp_i_k_0;
+  return dp_i20;
 };
 // @lc code=end
 
